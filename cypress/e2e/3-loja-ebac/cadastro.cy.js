@@ -3,14 +3,17 @@ import { faker } from "@faker-js/faker";
 
 describe('Funcionalidade: Cadastro', () => {
 
+    let nome = faker.person.firstName()
+    let sobrenome = faker.person.lastName()
+    let email = faker.internet.email()
+
     beforeEach(() => {
         cy.visit('minha-conta/')
     });
+
+       
     
-    it('Deve completar o cadastro com sucesso', () => {
-        let nome = faker.person.firstName()
-        let sobrenome = faker.person.lastName()
-        let email = faker.internet.email()
+    it('Deve completar o cadastro com sucesso', () => { 
 
         cy.get('#reg_email').type(email)
         cy.get('#reg_password').type('teste@123')
@@ -22,4 +25,9 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('.woocommerce-Button').click()
         cy.get('.woocommerce-message').should('contain', 'Detalhes da conta modificados com sucesso.')
     });
+
+    it.only('Deve completar o cadastro com sucesso usando comando customizado', () => {
+        cy.preCadastro(email, 'teste@123', nome, sobrenome)
+        cy.get('.woocommerce-message').should('contain', 'Detalhes da conta modificados com sucesso.')
+    })
 });
