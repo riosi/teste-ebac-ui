@@ -45,7 +45,9 @@ describe('Funcionalidade: Login', () => {
     });
 
     it.only('Deve fazer login com sucesso usando comandos customizados', () => {
-         cy.login('ingryd.teste@teste.com.br', 'teste123')
+        cy.fixture('perfil').then(login => {
+            cy.login(login.usuario, login.senha)
+        })
          cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, ingryd.teste (não é ingryd.teste? Sair)')
      });
 })
