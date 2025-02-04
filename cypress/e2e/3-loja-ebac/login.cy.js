@@ -7,10 +7,6 @@ describe('Funcionalidade: Login', () => {
         cy.visit('minha-conta/')
     });
 
-    afterEach(() => {
-        cy.screenshot()
-    });
-
     it('Deve fazer login com sucesso', () => {
         cy.get('#username').type('ingryd.teste@teste.com.br')
         cy.get('#password').type('teste123')
@@ -49,7 +45,7 @@ describe('Funcionalidade: Login', () => {
     });
 
     it.only('Deve fazer login com sucesso usando comandos customizados', () => {
-        cy.login('ingryd.teste@teste.com.br', 'teste123')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, ingryd.teste (não é ingryd.teste? Sair)')
-    });
+         cy.login('ingryd.teste@teste.com.br', 'teste123')
+         cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, ingryd.teste (não é ingryd.teste? Sair)')
+     });
 })
